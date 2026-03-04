@@ -578,7 +578,7 @@ def graceful_shutdown(signum=None, frame=None):
         signal.signal(signal.SIGINT, lambda s, f: reactor.callFromThread(reactor.stop))
         return
 
-    DRAIN_SECONDS = 60
+    DRAIN_SECONDS = 75  # T1 (60s) + 15s buffer for network jitter and worst-case fresh leases
 
     assigned_count = sum(1 for t in pcdict.values() if t.assigned_ipv6)
 
